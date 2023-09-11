@@ -40,4 +40,12 @@ public class RoleService {
         Role response = roleRepository.save(role);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
+    public ResponseEntity<Object> findById(Long id) {
+        Optional<Role> role = roleRepository.findById(id);
+        if (!role.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Role not found");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(role);
+    }
 }
